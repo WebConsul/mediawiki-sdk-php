@@ -3,6 +3,7 @@
 namespace MediawikiSdkPhp;
 
 use Dotenv\Dotenv;
+use MediawikiSdkPhp\Exceptions\MediaWikiException;
 use MediawikiSdkPhp\Resources\FileResource;
 use MediawikiSdkPhp\Resources\PageResource;
 use MediawikiSdkPhp\Resources\RevisionResource;
@@ -57,4 +58,17 @@ class MediaWiki
         return $this->search;
     }
 
+    /**
+     * @throws MediaWikiException
+     */
+    public function __call(string $name, array $params): void
+    {
+        throw new MediaWikiException(
+            [
+                'message' => 'The specified resource (tickets) does not exist',
+                'code'    => 404,
+                'reason'  => 'Resource not found',
+            ]
+        );
+    }
 }
