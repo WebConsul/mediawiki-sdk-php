@@ -14,9 +14,9 @@ use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 class MediaWikiAdapter
 {
+    const WIKIMEDIA_REST_API = 'api/rest_v1';
+    const MEDIAWIKI_REST_API = 'w/rest.php';
     const MEDIAWIKI_API_VERSION = 'v1';
-    const WIKIMEDIA_REST_API = '/api/rest_v1';
-    const MEDIAWIKI_REST_API = '/w/rest.php';
 
     private Client $client;
 
@@ -25,6 +25,8 @@ class MediaWikiAdapter
         $apiRoot = get_class($resource) === FileResource::class ?
             $_ENV['COMMONS_HOST'] :
             $_ENV['MEDIAWIKI_HOST'];
+
+        $apiRoot .= $resource::API_TYPE === 'MEDIAWIKI' ? self::MEDIAWIKI_REST_API : self::WIKIMEDIA_REST_API;
 
         $this->client = new Client(
             [
