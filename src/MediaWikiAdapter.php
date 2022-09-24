@@ -15,6 +15,8 @@ use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 class MediaWikiAdapter
 {
     const MEDIAWIKI_API_VERSION = 'v1';
+    const WIKIMEDIA_REST_API = '/api/rest_v1';
+    const MEDIAWIKI_REST_API = '/w/rest.php';
 
     private Client $client;
 
