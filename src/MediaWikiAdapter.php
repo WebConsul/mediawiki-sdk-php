@@ -21,8 +21,8 @@ class MediaWikiAdapter
     public function __construct(?AbstractResource $resource = null)
     {
         $apiRoot = get_class($resource) === FileResource::class ?
-            $_ENV['MEDIAWIKI_FILES_API_ROOT'] :
-            $_ENV['MEDIAWIKI_API_ROOT'];
+            $_ENV['COMMONS_HOST'] :
+            $_ENV['MEDIAWIKI_HOST'];
 
         $this->client = new Client(
             [
