@@ -14,9 +14,8 @@ use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 class MediaWikiAdapter
 {
-    const WIKIMEDIA_REST_API = 'api/rest_v1';
-    const MEDIAWIKI_REST_API = 'w/rest.php';
-    const MEDIAWIKI_API_VERSION = 'v1';
+    const WIKIMEDIA_REST_API = 'api/rest_v1/';
+    const MEDIAWIKI_REST_API = 'w/rest.php/v1/';
 
     private Client $client;
 
@@ -30,7 +29,7 @@ class MediaWikiAdapter
 
         $this->client = new Client(
             [
-                'base_uri' => $apiRoot . '/' . self::MEDIAWIKI_API_VERSION . '/',
+                'base_uri' => $apiRoot,
                 'headers'  => [
                     'User-Agent'   => 'ekut WikiMedia SDK (PHP)/1.0',
                     'Accept'       => 'application/json',
