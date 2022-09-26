@@ -31,7 +31,7 @@ class MediaWikiAdapter
             [
                 'base_uri' => $apiRoot,
                 'headers'  => [
-                    'User-Agent'   => 'ekut WikiMedia SDK (PHP)/1.0',
+                    'User-Agent'   => 'WebConsul WikiMedia SDK (PHP)/1.0',
                     'Accept'       => 'application/json',
                     'Content-Type' => 'application/json',
                 ],
