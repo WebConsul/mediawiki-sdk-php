@@ -10,13 +10,14 @@ use TypeError;
 
 abstract class AbstractResource
 {
-    const API_TYPE = 'MEDIAWIKI'; //or WIKIMEDIA
     protected MediaWikiAdapter $adapter;
 
     public function __construct()
     {
         $this->adapter = new MediaWikiAdapter($this);
     }
+
+    abstract public function getApiRoot(): string;
 
     /**
      * @throws MediaWikiException

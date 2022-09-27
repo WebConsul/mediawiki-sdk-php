@@ -16,7 +16,7 @@ use MediawikiSdkPhp\DTO\Responses\GetPageWithSource;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
-class PageResource extends AbstractResource
+class PageResource extends AbstractMediaWikiResource
 {
     /**
      * @throws MediaWikiException

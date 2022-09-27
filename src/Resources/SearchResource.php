@@ -6,7 +6,7 @@ use MediawikiSdkPhp\DTO\Requests\SearchRequest;
 use MediawikiSdkPhp\DTO\Responses\SearchResults;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
 
-class SearchResource extends AbstractResource
+class SearchResource extends AbstractMediaWikiResource
 {
     /**
      * @throws MediaWikiException

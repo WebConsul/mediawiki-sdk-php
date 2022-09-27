@@ -8,7 +8,7 @@ use MediawikiSdkPhp\DTO\Responses\CompareRevisions;
 use MediawikiSdkPhp\DTO\Responses\RevisionObject;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
 
-class RevisionResource extends AbstractResource
+class RevisionResource extends AbstractMediaWikiResource
 {
     /**
      * @throws MediaWikiException
