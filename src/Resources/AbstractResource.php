@@ -17,6 +17,8 @@ abstract class AbstractResource
         $this->adapter = new MediaWikiAdapter($this);
     }
 
+    abstract public function getApiRoot(): string;
+
     /**
      * @throws MediaWikiException
      */

@@ -9,27 +9,20 @@ use GuzzleHttp\Psr7\Response;
 use JetBrains\PhpStorm\ArrayShape;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
 use MediawikiSdkPhp\Resources\AbstractResource;
-use MediawikiSdkPhp\Resources\FileResource;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 class MediaWikiAdapter
 {
-    const MEDIAWIKI_API_VERSION = 'v1';
-
     private Client $client;
 
     public function __construct(?AbstractResource $resource = null)
     {
-        $apiRoot = get_class($resource) === FileResource::class ?
-            $_ENV['MEDIAWIKI_FILES_API_ROOT'] :
-            $_ENV['MEDIAWIKI_API_ROOT'];
-
         $this->client = new Client(
             [
-                'base_uri' => $apiRoot . '/' . self::MEDIAWIKI_API_VERSION . '/',
-                'headers'  => [
-                    'User-Agent'   => 'ekut WikiMedia SDK (PHP)/1.0',
-                    'Accept'       => 'application/json',
+                'base_uri' => $resource->getApiRoot(),
+                'headers' => [
+                    'User-Agent' => 'WebConsul WikiMedia SDK (PHP)/1.0',
+                    'Accept' => 'application/json',
                     'Content-Type' => 'application/json',
                 ],
             ]
@@ -46,7 +39,7 @@ class MediaWikiAdapter
         try {
             /** @var MediaWikiResponse $response */
             $response = $this->$httpMethod($url);
-            $data     = $response->toArray();
+            $data = $response->toArray();
 
             if ($response->getStatusCode() !== 200) {
                 $error = $this->generateError($data);
@@ -54,8 +47,8 @@ class MediaWikiAdapter
         } catch (ServerException $e) {
             /** @var Response $response */
             $response = $e->getResponse();
-            $data     = json_decode((string) $response->getBody(), true);
-            $error    = $this->generateError($data);
+            $data = json_decode((string)$response->getBody(), true);
+            $error = $this->generateError($data);
         }
 
         if ($error) {
@@ -66,8 +59,8 @@ class MediaWikiAdapter
             $res = new $responseDTOClass($data);
         } catch (UnknownProperties $e) {
             $error = [
-                'reason'  => 'Response validation: Unknown properties',
-                'code'    => $e->getCode(),
+                'reason' => 'Response validation: Unknown properties',
+                'code' => $e->getCode(),
                 'message' => $e->getMessage(),
             ];
             throw new MediaWikiException($error);
@@ -106,8 +99,8 @@ class MediaWikiAdapter
     {
         return [
             'message' => $data['messageTranslations']['en'],
-            'reason'  => $data['httpReason'],
-            'code'    => $data['httpCode'],
+            'reason' => $data['httpReason'],
+            'code' => $data['httpCode'],
         ];
     }
 }

@@ -13,8 +13,8 @@ class MediaWikiTest extends TestCase
     public function testConstructorWithDotEnvLoading()
     {
         new MediaWiki();
-        $this->assertArrayHasKey('MEDIAWIKI_API_ROOT', $_ENV);
-        $this->assertArrayHasKey('MEDIAWIKI_FILES_API_ROOT', $_ENV);
+        $this->assertArrayHasKey('MEDIAWIKI_HOST', $_ENV);
+        $this->assertArrayHasKey('COMMONS_HOST', $_ENV);
     }
 
     public function testGetFileResource()

@@ -37,7 +37,7 @@ class FileProperties extends DataTransferObject
     /**
      * The length of the video, audio, or multimedia file or null for other media types
      */
-    public ?int $duration;
+    public ?float $duration;
 
     public string $url;
 }

@@ -34,8 +34,8 @@ The package use `vlucas/phpdotenv` for set environment variables. All you need t
 fulfill `.env` file in root project folder with two variables/values:
 
 ```dotenv
-MEDIAWIKI_API_ROOT="https://en.wikipedia.org/w/rest.php"
-MEDIAWIKI_FILES_API_ROOT="https://commons.wikimedia.org/w/rest.php"
+MEDIAWIKI_HOST="https://www.wikipedia.org/"
+COMMONS_HOST="https://commons.wikimedia.org/"
 ```
 
 ### Available Resources and Actions

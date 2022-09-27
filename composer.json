@@ -1,5 +1,5 @@
 {
-  "name": "ekut/mediawiki-sdk-php",
+  "name": "webconsul/mediawiki-sdk-php",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": "^8.0",
+    "php": "^8.1",
     "ekut/spatie-dto-validators": "^1.0",
     "guzzlehttp/guzzle": "^7.4",
     "spatie/data-transfer-object": "^3.7",
