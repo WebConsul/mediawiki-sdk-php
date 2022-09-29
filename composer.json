@@ -23,6 +23,9 @@
       "MediawikiSdkPhp\\": "src/"
     }
   },
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  },
   "config": {
     "optimize-autoloader": true,
     "preferred-install": "dist",
