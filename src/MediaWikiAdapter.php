@@ -15,7 +15,7 @@ class MediaWikiAdapter
 {
     private Client $client;
 
-    public function __construct(?AbstractResource $resource = null)
+    public function __construct(?AbstractResource $resource = null, $language = 'en')
     {
         $this->client = new Client(
             [
@@ -24,6 +24,7 @@ class MediaWikiAdapter
                     'User-Agent' => 'WebConsul WikiMedia SDK (PHP)/1.0',
                     'Accept' => 'application/json',
                     'Content-Type' => 'application/json',
+                    'Accept-Language' => "$language",
                 ],
             ]
         );
