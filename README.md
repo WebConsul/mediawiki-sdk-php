@@ -38,6 +38,28 @@ MEDIAWIKI_HOST="https://www.wikipedia.org/"
 COMMONS_HOST="https://commons.wikimedia.org/"
 ```
 
+### Development
+
+Need **Docker** and **Docker-Compose**.
+
+Init developer environment:
+
+```
+make init
+```
+
+Run tests:
+
+```
+make sdk-test
+```
+
+Run bash shell:
+
+```
+make sdk-shell
+```
+
 ### Available Resources and Actions
 
 * file
