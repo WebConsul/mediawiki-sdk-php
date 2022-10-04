@@ -19,12 +19,11 @@ class MediaWikiAdapter
     {
         $this->client = new Client(
             [
-                'base_uri' => $resource->getApiRoot(),
+                'base_uri' => str_replace('{lang}', $language, $resource->getApiRoot()),
                 'headers' => [
                     'User-Agent' => 'WebConsul WikiMedia SDK (PHP)/1.0',
                     'Accept' => 'application/json',
                     'Content-Type' => 'application/json',
-                    'Accept-Language' => "$language",
                 ],
             ]
         );
