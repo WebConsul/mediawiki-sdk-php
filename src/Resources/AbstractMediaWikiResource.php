@@ -14,6 +14,6 @@ abstract class AbstractMediaWikiResource extends AbstractResource
 
         $apiRoot .= self::MEDIAWIKI_REST_API;
 
-        return $apiRoot;
+        return str_replace('{lang}', $this->getLang(), $apiRoot);
     }
 }

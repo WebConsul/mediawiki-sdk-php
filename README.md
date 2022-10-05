@@ -26,6 +26,12 @@ In general, we use the SDK by this way:
   $data = $res->toArray();
 ```
 
+Default language is English. If we want to use another language, we can set it in MediaWiki constructor:
+
+```php
+  $wiki = new \MediawikiSdkPhp\MediaWiki('ru');
+```
+
 Real examples: see bellow. Error handling: see bellow.
 
 ### Configuration (.env)
