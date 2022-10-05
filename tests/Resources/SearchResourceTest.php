@@ -99,4 +99,16 @@ class SearchResourceTest extends TestCase
         $params = ['q' => 'Jupiter', 'limit' => 1000];
         $this->wiki->search()->autocompletePageTitle($params);
     }
+
+    /**
+     * @throws MediaWikiException
+     */
+    public function testAutocompletePageTitleOnRussianSuccess()
+    {
+        $this->wiki = new MediaWiki('ru');
+        $params   = ['q' => 'Юпитер', 'limit' => 5];
+        $response = $this->wiki->search()->autocompletePageTitle($params);
+
+        $this->assertInstanceOf(SearchResults::class, $response);
+    }
 }

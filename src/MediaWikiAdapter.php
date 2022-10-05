@@ -15,11 +15,11 @@ class MediaWikiAdapter
 {
     private Client $client;
 
-    public function __construct(?AbstractResource $resource = null, $language = 'en')
+    public function __construct(?AbstractResource $resource = null)
     {
         $this->client = new Client(
             [
-                'base_uri' => str_replace('{lang}', $language, $resource->getApiRoot()),
+                'base_uri' => $resource->getApiRoot(),
                 'headers' => [
                     'User-Agent' => 'WebConsul WikiMedia SDK (PHP)/1.0',
                     'Accept' => 'application/json',

@@ -8,6 +8,8 @@ abstract class AbstractWikiMediaResource extends AbstractResource
 
     public function getApiRoot(): string
     {
-        return $_ENV['MEDIAWIKI_HOST'] . self::WIKIMEDIA_REST_API;
+        $apiRoot = $_ENV['MEDIAWIKI_HOST'] . self::WIKIMEDIA_REST_API;
+
+        return str_replace('{lang}', $this->getLang(), $apiRoot);
     }
 }

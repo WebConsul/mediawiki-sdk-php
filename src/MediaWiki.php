@@ -16,7 +16,7 @@ class MediaWiki
     private ?RevisionResource $revision = null;
     private ?SearchResource   $search   = null;
 
-    public function __construct()
+    public function __construct(private $lang = 'en')
     {
         $dotenv = Dotenv::createImmutable(__DIR__ . "../..");
         $dotenv->load();
@@ -25,7 +25,7 @@ class MediaWiki
     public function file(): FileResource
     {
         if (is_null($this->file)) {
-            $this->file = new FileResource();
+            $this->file = new FileResource($this->lang);
         }
 
         return $this->file;
@@ -34,7 +34,7 @@ class MediaWiki
     public function page(): PageResource
     {
         if (is_null($this->page)) {
-            $this->page = new PageResource();
+            $this->page = new PageResource($this->lang);
         }
 
         return $this->page;
@@ -43,7 +43,7 @@ class MediaWiki
     public function revision(): RevisionResource
     {
         if (is_null($this->revision)) {
-            $this->revision = new RevisionResource();
+            $this->revision = new RevisionResource($this->lang);
         }
 
         return $this->revision;
@@ -52,7 +52,7 @@ class MediaWiki
     public function search(): SearchResource
     {
         if (is_null($this->search)) {
-            $this->search = new SearchResource();
+            $this->search = new SearchResource($this->lang);
         }
 
         return $this->search;
