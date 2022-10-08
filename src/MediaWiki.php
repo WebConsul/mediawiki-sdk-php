@@ -4,10 +4,10 @@ namespace MediawikiSdkPhp;
 
 use Dotenv\Dotenv;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
-use MediawikiSdkPhp\Resources\FileResource;
-use MediawikiSdkPhp\Resources\PageResource;
-use MediawikiSdkPhp\Resources\RevisionResource;
-use MediawikiSdkPhp\Resources\SearchResource;
+use MediawikiSdkPhp\Resources\MediaWiki\FileResource;
+use MediawikiSdkPhp\Resources\MediaWiki\PageResource;
+use MediawikiSdkPhp\Resources\MediaWiki\RevisionResource;
+use MediawikiSdkPhp\Resources\MediaWiki\SearchResource;
 
 class MediaWiki
 {
