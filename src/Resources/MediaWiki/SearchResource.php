@@ -1,10 +1,11 @@
 <?php
 
-namespace MediawikiSdkPhp\Resources;
+namespace MediawikiSdkPhp\Resources\MediaWiki;
 
 use MediawikiSdkPhp\DTO\Requests\SearchRequest;
 use MediawikiSdkPhp\DTO\Responses\SearchResults;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
+use MediawikiSdkPhp\Resources\AbstractMediaWikiResource;
 
 class SearchResource extends AbstractMediaWikiResource
 {

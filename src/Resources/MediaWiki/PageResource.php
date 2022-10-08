@@ -1,6 +1,6 @@
 <?php
 
-namespace MediawikiSdkPhp\Resources;
+namespace MediawikiSdkPhp\Resources\MediaWiki;
 
 use MediawikiSdkPhp\DTO\Requests\GetPageHistoryCountsRequest;
 use MediawikiSdkPhp\DTO\Requests\GetPageHistoryRequest;
@@ -14,6 +14,7 @@ use MediawikiSdkPhp\DTO\Responses\GetPageHtml;
 use MediawikiSdkPhp\DTO\Responses\GetPageOffline;
 use MediawikiSdkPhp\DTO\Responses\GetPageWithSource;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
+use MediawikiSdkPhp\Resources\AbstractMediaWikiResource;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 class PageResource extends AbstractMediaWikiResource

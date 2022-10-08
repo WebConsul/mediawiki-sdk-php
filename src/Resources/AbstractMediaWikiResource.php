@@ -2,6 +2,8 @@
 
 namespace MediawikiSdkPhp\Resources;
 
+use MediawikiSdkPhp\Resources\MediaWiki\FileResource;
+
 abstract class AbstractMediaWikiResource extends AbstractResource
 {
     const MEDIAWIKI_REST_API = 'w/rest.php/v1/';

@@ -1,12 +1,13 @@
 <?php
 
-namespace MediawikiSdkPhp\Resources;
+namespace MediawikiSdkPhp\Resources\MediaWiki;
 
 use MediawikiSdkPhp\DTO\Requests\CompareRevisionsRequest;
 use MediawikiSdkPhp\DTO\Requests\GetRevisionRequest;
 use MediawikiSdkPhp\DTO\Responses\CompareRevisions;
 use MediawikiSdkPhp\DTO\Responses\RevisionObject;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
+use MediawikiSdkPhp\Resources\AbstractMediaWikiResource;
 
 class RevisionResource extends AbstractMediaWikiResource
 {
