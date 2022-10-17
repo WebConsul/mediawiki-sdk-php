@@ -25,6 +25,4 @@ class GetPageSummary extends DataTransferObject
     public string $timestamp;
 
     public string $description;
-
-    public array $coordinates;
 }
