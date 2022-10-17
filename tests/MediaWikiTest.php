@@ -2,10 +2,11 @@
 
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
 use MediawikiSdkPhp\MediaWiki;
-use MediawikiSdkPhp\Resources\FileResource;
-use MediawikiSdkPhp\Resources\PageResource;
-use MediawikiSdkPhp\Resources\RevisionResource;
-use MediawikiSdkPhp\Resources\SearchResource;
+use MediawikiSdkPhp\Resources\MediaWiki\FileResource;
+use MediawikiSdkPhp\Resources\MediaWiki\PageResource;
+use MediawikiSdkPhp\Resources\MediaWiki\RevisionResource;
+use MediawikiSdkPhp\Resources\MediaWiki\SearchResource;
+use MediawikiSdkPhp\Resources\WikiMedia\PageContentResource;
 use PHPUnit\Framework\TestCase;
 
 class MediaWikiTest extends TestCase
@@ -29,6 +30,13 @@ class MediaWikiTest extends TestCase
         $wiki     = new MediaWiki();
         $resource = $wiki->page();
         $this->assertInstanceOf(PageResource::class, $resource);
+    }
+
+    public function testGetPageContentResource()
+    {
+        $wiki     = new MediaWiki();
+        $resource = $wiki->pageContent();
+        $this->assertInstanceOf(PageContentResource::class, $resource);
     }
 
     public function testGetRevisionResource()
