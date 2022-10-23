@@ -35,7 +35,7 @@ class PageContentResourceTest extends TestCase
         $params = ['title' => 'hflk;aHF'];
         $this->expectException(MediaWikiException::class);
         $this->expectExceptionCode(404);
-        $this->expectExceptionMessage('The specified title (hflk;aHF) does not exist');
+        $this->expectExceptionMessage('Page or revision not found.');
 
         $this->wiki->pageContent()->summary($params);
     }

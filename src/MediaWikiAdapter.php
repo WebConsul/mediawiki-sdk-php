@@ -7,6 +7,7 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Psr7\Response;
 use JetBrains\PhpStorm\ArrayShape;
+use JsonException;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
 use MediawikiSdkPhp\Resources\AbstractResource;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
@@ -15,7 +16,7 @@ class MediaWikiAdapter
 {
     private Client $client;
 
-    public function __construct(?AbstractResource $resource = null)
+    public function __construct(AbstractResource $resource)
     {
         $this->client = new Client(
             [
@@ -30,7 +31,7 @@ class MediaWikiAdapter
     }
 
     /**
-     * @throws MediaWikiException
+     * @throws MediaWikiException|JsonException
      */
     public function handle(string $httpMethod, string $url, string $responseDTOClass)
     {
@@ -40,15 +41,16 @@ class MediaWikiAdapter
             /** @var MediaWikiResponse $response */
             $response = $this->$httpMethod($url);
             $data = $response->toArray();
+            $status = $response->getStatusCode();
 
-            if ($response->getStatusCode() !== 200) {
-                $error = $this->generateError($data);
+            if ($status !== 200) {
+                $error = $this->generateError($data, $status);
             }
         } catch (ServerException $e) {
             /** @var Response $response */
             $response = $e->getResponse();
-            $data = json_decode((string)$response->getBody(), true);
-            $error = $this->generateError($data);
+            $data = json_decode((string)$response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+            $error = $this->generateError($data, $e->getCode());
         }
 
         if ($error) {
@@ -95,12 +97,30 @@ class MediaWikiAdapter
      * Generates error object from "bad" MediaWiki response (status of response >=400)
      */
     #[ArrayShape(['message' => "mixed", 'reason' => "mixed", 'code' => "mixed"])]
-    public function generateError(array $data): array
+    public function generateError(array $data, int $status): array
     {
+        // For MediaWiki response
+        if (array_key_exists('httpReason', $data)) {
+            return [
+                'message' => $data['messageTranslations']['en'],
+                'reason' => $data['httpReason'],
+                'code' => $data['httpCode'],
+            ];
+        }
+
+        // For WikiMedia response
+        if (array_key_exists('detail', $data)) {
+            return [
+                'message' => $data['detail'],
+                'reason' => $data['title'],
+                'code' => $status
+            ];
+        }
+
         return [
-            'message' => $data['messageTranslations']['en'],
-            'reason' => $data['httpReason'],
-            'code' => $data['httpCode'],
+            'message' => 'Unknown errored response format',
+            'reason' => 'Bad response',
+            'code' => 0
         ];
     }
 }
