@@ -266,13 +266,6 @@ You can use this action for a typeahead search that automatically suggests relev
   $res = $wiki->search()->autocompletePageTitle($params); 
 ```
 
-## Request parameters validation
-
-For validation the package use `spatie/data-transfer-object` and `ekut/spatie-dto-validators`.
-
-Input array `$params` for each action will be validated with related `{...Request}` class (extends DataTransferObject).
-All Request DTOs are strict. It means: if `$params` contains some unknown property, MediaWikiException will be thrown.
-See [Request classes](src\DTO\Requests) in code tree.
 
 ## Wikimedia REST API
 
@@ -285,6 +278,14 @@ See [Request classes](src\DTO\Requests) in code tree.
   $params = ['title' => 'Jupiter'];
   $res = $wiki->pageContent()->summary($params); 
 ```
+
+## Request parameters validation
+
+For validation the package use `spatie/data-transfer-object` and `ekut/spatie-dto-validators`.
+
+Input array `$params` for each action will be validated with related `{...Request}` class (extends DataTransferObject).
+All Request DTOs are strict. It means: if `$params` contains some unknown property, MediaWikiException will be thrown.
+See [Request classes](src\DTO\Requests) in code tree.
 
 ## Error Handling
 
