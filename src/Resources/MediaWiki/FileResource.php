@@ -1,10 +1,11 @@
 <?php
 
-namespace MediawikiSdkPhp\Resources;
+namespace MediawikiSdkPhp\Resources\MediaWiki;
 
 use MediawikiSdkPhp\DTO\Requests\FileRequest;
 use MediawikiSdkPhp\DTO\Responses\GetFile;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
+use MediawikiSdkPhp\Resources\AbstractMediaWikiResource;
 
 class FileResource extends AbstractMediaWikiResource
 {

@@ -4,10 +4,11 @@ namespace MediawikiSdkPhp;
 
 use Dotenv\Dotenv;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
-use MediawikiSdkPhp\Resources\FileResource;
-use MediawikiSdkPhp\Resources\PageResource;
-use MediawikiSdkPhp\Resources\RevisionResource;
-use MediawikiSdkPhp\Resources\SearchResource;
+use MediawikiSdkPhp\Resources\MediaWiki\FileResource;
+use MediawikiSdkPhp\Resources\MediaWiki\PageResource;
+use MediawikiSdkPhp\Resources\MediaWiki\RevisionResource;
+use MediawikiSdkPhp\Resources\MediaWiki\SearchResource;
+use MediawikiSdkPhp\Resources\WikiMedia\PageContentResource;
 
 class MediaWiki
 {
@@ -15,6 +16,7 @@ class MediaWiki
     private ?PageResource     $page     = null;
     private ?RevisionResource $revision = null;
     private ?SearchResource   $search   = null;
+    private ?PageContentResource $pageContent = null;
 
     public function __construct(private $lang = 'en')
     {
@@ -38,6 +40,15 @@ class MediaWiki
         }
 
         return $this->page;
+    }
+
+    public function pageContent(): PageContentResource
+    {
+        if (is_null($this->pageContent)) {
+            $this->pageContent = new PageContentResource($this->lang);
+        }
+
+        return $this->pageContent;
     }
 
     public function revision(): RevisionResource

@@ -1,6 +1,6 @@
 <?php
 
-namespace MediawikiSdkPhp\Resources;
+namespace MediawikiSdkPhp\Resources\MediaWiki;
 
 use MediawikiSdkPhp\DTO\Requests\GetPageHistoryCountsRequest;
 use MediawikiSdkPhp\DTO\Requests\GetPageHistoryRequest;
@@ -14,6 +14,7 @@ use MediawikiSdkPhp\DTO\Responses\GetPageHtml;
 use MediawikiSdkPhp\DTO\Responses\GetPageOffline;
 use MediawikiSdkPhp\DTO\Responses\GetPageWithSource;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
+use MediawikiSdkPhp\Resources\AbstractMediaWikiResource;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 class PageResource extends AbstractMediaWikiResource
@@ -57,20 +58,21 @@ class PageResource extends AbstractMediaWikiResource
     public function getHtml(array $params): ?GetPageHtml
     {
         $this->validateParams(PageRequest::class, $params);
-        $res      = null;
-        $url      = "page/{$params['title']}/html";
+        $res = null;
+        $url = "page/{$params['title']}/html";
         $response = $this->adapter->get($url);
-        $error    = [];
+        $error = [];
+        $status = $response->getStatusCode();
 
-        if ($response->getStatusCode() !== 200) {
-            $error = $this->adapter->generateError($response->toArray());
+        if ($status !== 200) {
+            $error = $this->adapter->generateError($response->toArray(), $status);
         }
         try {
             $res = new GetPageHtml(['html' => $response->getContent()]);
         } catch (UnknownProperties $e) {
             $error = [
-                'reason'  => 'Response validation: Unknown properties',
-                'code'    => $e->getCode(),
+                'reason' => 'Response validation: Unknown properties',
+                'code' => $e->getCode(),
                 'message' => $e->getMessage(),
             ];
         }
