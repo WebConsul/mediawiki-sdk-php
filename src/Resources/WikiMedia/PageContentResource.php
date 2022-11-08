@@ -3,12 +3,22 @@
 namespace MediawikiSdkPhp\Resources\WikiMedia;
 
 use MediawikiSdkPhp\DTO\Requests\PageRequest;
+use MediawikiSdkPhp\DTO\Responses\GetPageCheck;
 use MediawikiSdkPhp\DTO\Responses\GetPageSummary;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
 use MediawikiSdkPhp\Resources\AbstractWikiMediaResource;
 
 class PageContentResource extends AbstractWikiMediaResource
 {
+    /**
+     * @throws MediaWikiException
+     */
+    public function page(){
+        $url = "page/";
+
+        return $this->adapter->handle('get', $url, GetPageCheck::class);
+    }
+
     /**
      * @throws MediaWikiException
      */
