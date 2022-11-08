@@ -2,6 +2,7 @@
 
 namespace Resources;
 
+use MediawikiSdkPhp\DTO\Responses\GetPageCheck;
 use MediawikiSdkPhp\DTO\Responses\GetPageSummary;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
 use MediawikiSdkPhp\MediaWiki;
@@ -39,6 +40,17 @@ class PageContentResourceTest extends TestCase
 
         $this->wiki->pageContent()->summary($params);
     }
+
+    /**
+     * @return void
+     * @throws MediaWikiException
+     */
+    public function testGetPageSuccess(): void
+    {
+        $response = $this->wiki->pageContent()->page();
+        $this->assertInstanceOf(GetPageCheck::class, $response);
+    }
+
 }
 
 
