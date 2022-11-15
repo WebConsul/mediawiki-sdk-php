@@ -12,9 +12,12 @@ use MediawikiSdkPhp\Resources\AbstractWikiMediaResource;
 class PageContentResource extends AbstractWikiMediaResource
 {
     /**
+     * @param array $params
+     * @return mixed
+     * @throws JsonException
      * @throws MediaWikiException
      */
-    public function summary(array $params)
+    public function getSummary(array $params): mixed
     {
         $this->validateParams(PageRequest::class, $params);
 
@@ -29,7 +32,7 @@ class PageContentResource extends AbstractWikiMediaResource
      * @throws MediaWikiException
      * @throws JsonException
      */
-    public function title(array $params): GetPageTitlesList
+    public function getTitle(array $params): GetPageTitlesList
     {
         $this->validateParams(PageRequest::class, $params);
 
