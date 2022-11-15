@@ -74,7 +74,7 @@ COMMONS_HOST="https://commons.wikimedia.org/"
 ### Wikimedia REST API
 * pageContent
   * getPageSummary
-  * @ToDo
+  * getPageTitle
 * mobile - @ToDo
 * feed - @ToDo
 * transforms - @ToDo
@@ -276,7 +276,15 @@ You can use this action for a typeahead search that automatically suggests relev
 ```php
   $wiki = new MediaWiki();
   $params = ['title' => 'Jupiter'];
-  $res = $wiki->pageContent()->summary($params); 
+  $res = $wiki->pageContent()->getSummary($params); 
+```
+
+#### getPageTitle
+
+```php
+  $wiki = new MediaWiki();
+  $params = ['title' => 'Jupiter'];
+  $res = $wiki->pageContent()->getTitle($params); 
 ```
 
 ## Request parameters validation

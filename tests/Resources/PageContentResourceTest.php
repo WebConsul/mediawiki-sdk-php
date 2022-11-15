@@ -2,7 +2,9 @@
 
 namespace Resources;
 
+use JsonException;
 use MediawikiSdkPhp\DTO\Responses\GetPageSummary;
+use MediawikiSdkPhp\DTO\Responses\GetPageTitlesList;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
 use MediawikiSdkPhp\MediaWiki;
 use PHPUnit\Framework\TestCase;
@@ -18,26 +20,52 @@ class PageContentResourceTest extends TestCase
 
     /**
      * @throws MediaWikiException
+     * @throws JsonException
      */
-    public function testGetSuccess()
+    public function testGetSummarySuccess(): void
     {
         $params   = ['title' => 'Jupiter'];
-        $response = $this->wiki->pageContent()->summary($params);
+        $response = $this->wiki->pageContent()->getSummary($params);
 
         $this->assertInstanceOf(GetPageSummary::class, $response);
     }
 
     /**
      * @throws MediaWikiException
+     * @throws JsonException
      */
-    public function testGetNotFound()
+    public function testGetSummaryNotFound(): void
     {
         $params = ['title' => 'hflk;aHF'];
         $this->expectException(MediaWikiException::class);
         $this->expectExceptionCode(404);
         $this->expectExceptionMessage('Page or revision not found.');
 
-        $this->wiki->pageContent()->summary($params);
+        $this->wiki->pageContent()->getSummary($params);
+    }
+
+    /**
+     * @throws JsonException
+     * @throws MediaWikiException
+     */
+    public function testGetTitleSuccess(): void
+    {
+        $params   = ['title' => 'Jupiter'];
+        $response = $this->wiki->pageContent()->getTitle($params);
+
+        $this->assertInstanceOf(GetPageTitlesList::class, $response);
+    }
+
+    /**
+     * @throws JsonException
+     * @throws MediaWikiException
+     */
+    public function testGetTitleNotFound(): void
+    {
+        $params = ['title' => 'hflk;aHF'];
+        $this->expectException(MediaWikiException::class);
+
+        $this->wiki->pageContent()->getTitle($params);
     }
 }
 
