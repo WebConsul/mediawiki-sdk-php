@@ -67,6 +67,39 @@ class PageContentResourceTest extends TestCase
 
         $this->wiki->pageContent()->getTitle($params);
     }
+
+
+    /**
+     * @return void
+     * @throws MediaWikiException
+     */
+    public function testGetHtmlSuccess(): void
+    {
+        $params = [
+            'title' => 'Jupiter',
+            'redirect' => true,
+            'stash' => false,
+        ];
+
+        $response = $this->wiki->pageContent()->getHtml($params);
+
+        $this->assertStringContainsString('html', $response);
+    }
+
+
+    /**
+     * @return void
+     * @throws MediaWikiException
+     */
+    public function testGetHtmlNotFound(): void
+    {
+        $params = ['title' => 'qwe123qwe123'];
+        $this->expectException(MediaWikiException::class);
+        $this->expectExceptionCode(404);
+        $this->expectExceptionMessage('Not found');
+
+        $this->wiki->pageContent()->getHtml($params);
+    }
 }
 
 

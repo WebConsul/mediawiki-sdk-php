@@ -32,7 +32,7 @@ class PageContentResource extends AbstractWikiMediaResource
      * @return string
      * @throws MediaWikiException
      */
-    public function html(array $params): string
+    public function getHtml(array $params): string
     {
         $this->validateParams(PageHtmlRequest::class, $params);
 
