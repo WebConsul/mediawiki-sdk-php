@@ -75,7 +75,8 @@ COMMONS_HOST="https://commons.wikimedia.org/"
 * pageContent
   * getPageSummary
   * getPageTitle
-* mobile - @ToDo
+* mobile
+  * getSections
 * feed - @ToDo
 * transforms - @ToDo
 * math - @ToDo
@@ -285,6 +286,19 @@ You can use this action for a typeahead search that automatically suggests relev
   $wiki = new MediaWiki();
   $params = ['title' => 'Jupiter'];
   $res = $wiki->pageContent()->getTitle($params); 
+```
+
+### Mobile
+
+#### getSections
+
+Retrieve the latest HTML for a page title optimised for viewing with native mobile applications. 
+Note that the output is split by sections.
+
+```php
+  $wiki = new MediaWiki();
+  $params = ['title' => 'Jupiter'];
+  $res = $wiki->mobile()->getSections($params);
 ```
 
 ## Request parameters validation
