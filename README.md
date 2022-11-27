@@ -78,6 +78,7 @@ COMMONS_HOST="https://commons.wikimedia.org/"
 * mobile
   * getSections
   * getSectionsByRevision
+  * getSectionsLead
 * feed - @ToDo
 * transforms - @ToDo
 * math - @ToDo
@@ -305,6 +306,14 @@ You can use this action for a typeahead search that automatically suggests relev
   $wiki = new MediaWiki();
   $params = ['title' => 'Jupiter', 'revision' => 1124023924];
   $res = $wiki->mobile()->getSectionsByRevision($params);
+```
+
+#### getSectionsLead
+
+```php
+  $wiki = new MediaWiki();
+  $params = ['title' => 'Jupiter'];
+  $res = $wiki->mobile()->getSectionsLead($params);
 ```
 
 ## Request parameters validation
