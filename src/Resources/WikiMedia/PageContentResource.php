@@ -29,36 +29,6 @@ class PageContentResource extends AbstractWikiMediaResource
 
     /**
      * @param array $params
-     * @return string
-     * @throws MediaWikiException
-     */
-    public function getHtml(array $params): string
-    {
-        $this->validateParams(PageHtmlRequest::class, $params);
-
-        $url = "page/html/{$params['title']}";
-        unset($params['title']);
-
-        if (!empty($params)){
-            $queryParams = http_build_query($params);
-            $url .= "?{$queryParams}";
-        }
-
-        $response = $this->adapter->get($url);
-
-        if ($response->getStatusCode() !== 200){
-            throw new MediaWikiException([
-                'message' => 'Not found',
-                'reason' => 'Nothing found by this name',
-                'code' => 404,
-            ]);
-        }
-
-        return $response->getContent();
-    }
-
-    /**
-     * @param array $params
      * @return GetPageTitlesList
      * @throws MediaWikiException
      * @throws JsonException
