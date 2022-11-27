@@ -76,7 +76,7 @@ class PageContentResourceTest extends TestCase
             'stash' => false,
         ];
 
-        $response = $this->wiki->pageContent()->html($params);
+        $response = $this->wiki->pageContent()->getHtml($params);
 
         $this->assertStringContainsString('html', $response);
     }
@@ -87,9 +87,9 @@ class PageContentResourceTest extends TestCase
         $params = ['title' => 'qwe123qwe123'];
         $this->expectException(MediaWikiException::class);
         $this->expectExceptionCode(404);
-        $this->expectExceptionMessage('Not found');
+        $this->expectExceptionMessage('Page or revision not found.');
 
-        $this->wiki->pageContent()->html($params);
+        $this->wiki->pageContent()->getHtml($params);
     }
 }
 
