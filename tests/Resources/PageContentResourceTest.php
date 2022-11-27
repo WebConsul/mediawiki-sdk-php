@@ -67,6 +67,33 @@ class PageContentResourceTest extends TestCase
 
         $this->wiki->pageContent()->getTitle($params);
     }
+
+    /**
+     * @throws JsonException
+     * @throws MediaWikiException
+     */
+    public function testGetTitleRevisionSuccess(): void
+    {
+        $params   = ['title' => 'Jupiter'];
+        $pageTitleResponse = $this->wiki->pageContent()->getTitle($params)->toArray();
+        $params['revision'] = $pageTitleResponse['items'][0]['rev'];
+
+        $response = $this->wiki->pageContent()->getTitleRevision($params);
+
+        $this->assertInstanceOf(GetPageTitlesList::class, $response);
+    }
+
+    /**
+     * @throws JsonException
+     * @throws MediaWikiException
+     */
+    public function testGetTitleRevisionNotFound(): void
+    {
+        $params = ['title' => 'hflk;aHF', 'revision' => 1];
+        $this->expectException(MediaWikiException::class);
+
+        $this->wiki->pageContent()->getTitleRevision($params);
+    }
 }
 
 
