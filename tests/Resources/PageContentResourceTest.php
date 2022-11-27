@@ -67,6 +67,30 @@ class PageContentResourceTest extends TestCase
 
         $this->wiki->pageContent()->getTitle($params);
     }
+
+    public function testGetHtmlSuccess()
+    {
+        $params = [
+            'title' => 'Main_Page',
+            'redirect' => true,
+            'stash' => false,
+        ];
+
+        $response = $this->wiki->pageContent()->getHtml($params);
+
+        $this->assertStringContainsString('html', $response);
+    }
+
+
+    public function testGetHtmlNotFound()
+    {
+        $params = ['title' => 'qwe123qwe123'];
+        $this->expectException(MediaWikiException::class);
+        $this->expectExceptionCode(404);
+        $this->expectExceptionMessage('Page or revision not found.');
+
+        $this->wiki->pageContent()->getHtml($params);
+    }
 }
 
 
