@@ -58,14 +58,18 @@ class PageContentResource extends AbstractWikiMediaResource
             $url .= "?{$queryParams}";
         }
 
-        $response = $this->adapter->get($url);
+        $error = [];
 
-        if ($response->getStatusCode() !== 200){
-            throw new MediaWikiException([
-                'message' => 'Not found',
-                'reason' => 'Nothing found by this name',
-                'code' => 404,
-            ]);
+        $response = $this->adapter->get($url);
+        $data = $response->toArray();
+        $status = $response->getStatusCode();
+
+        if ($status !== 200){
+            $error = $this->adapter->generateError($data, $status);
+        }
+
+        if ($error) {
+            throw new MediaWikiException($error);
         }
 
         return $response->getContent();
