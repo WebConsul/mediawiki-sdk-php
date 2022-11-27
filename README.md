@@ -77,6 +77,7 @@ COMMONS_HOST="https://commons.wikimedia.org/"
   * getPageTitle
 * mobile
   * getSections
+  * getSectionsByRevision
 * feed - @ToDo
 * transforms - @ToDo
 * math - @ToDo
@@ -292,13 +293,18 @@ You can use this action for a typeahead search that automatically suggests relev
 
 #### getSections
 
-Retrieve the latest HTML for a page title optimised for viewing with native mobile applications. 
-Note that the output is split by sections.
-
 ```php
   $wiki = new MediaWiki();
   $params = ['title' => 'Jupiter'];
   $res = $wiki->mobile()->getSections($params);
+```
+
+#### getSectionsByRevision
+
+```php
+  $wiki = new MediaWiki();
+  $params = ['title' => 'Jupiter', 'revision' => 1124023924];
+  $res = $wiki->mobile()->getSectionsByRevision($params);
 ```
 
 ## Request parameters validation
