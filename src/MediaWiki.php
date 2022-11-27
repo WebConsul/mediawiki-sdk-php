@@ -8,6 +8,7 @@ use MediawikiSdkPhp\Resources\MediaWiki\FileResource;
 use MediawikiSdkPhp\Resources\MediaWiki\PageResource;
 use MediawikiSdkPhp\Resources\MediaWiki\RevisionResource;
 use MediawikiSdkPhp\Resources\MediaWiki\SearchResource;
+use MediawikiSdkPhp\Resources\WikiMedia\MobileResource;
 use MediawikiSdkPhp\Resources\WikiMedia\PageContentResource;
 
 class MediaWiki
@@ -17,6 +18,7 @@ class MediaWiki
     private ?RevisionResource $revision = null;
     private ?SearchResource   $search   = null;
     private ?PageContentResource $pageContent = null;
+    private ?MobileResource $mobile = null;
 
     public function __construct(private $lang = 'en')
     {
@@ -67,6 +69,15 @@ class MediaWiki
         }
 
         return $this->search;
+    }
+
+    public function mobile(): MobileResource
+    {
+        if (is_null($this->mobile)) {
+            $this->mobile = new MobileResource($this->lang);
+        }
+
+        return $this->mobile;
     }
 
     /**
