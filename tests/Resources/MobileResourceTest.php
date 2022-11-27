@@ -4,6 +4,7 @@ namespace Resources;
 
 use MediawikiSdkPhp\DTO\Responses\Mobile\GetMobile;
 use MediawikiSdkPhp\DTO\Responses\Mobile\GetMobileLead;
+use MediawikiSdkPhp\DTO\Responses\Mobile\GetMobileRemaining;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
 use MediawikiSdkPhp\MediaWiki;
 use PHPUnit\Framework\TestCase;
@@ -89,5 +90,24 @@ class MobileResourceTest extends TestCase
         $this->expectExceptionCode(404);
 
         $this->wiki->mobile()->getSectionsLeadByRevision($params);
+    }
+
+    public function testGetSectionsRemaining(): void
+    {
+        $params = ['title' => 'Jupiter'];
+
+        $response = $this->wiki->mobile()->getSectionsRemaining($params);
+
+        $this->assertInstanceOf(GetMobileRemaining::class, $response);
+    }
+
+    public function testGetSectionsRemainingNotFound(): void
+    {
+        $params = ['title' => 'hflk;aHF'];
+        $this->expectException(MediaWikiException::class);
+        $this->expectExceptionCode(404);
+        $this->expectExceptionMessage('Page or revision not found.');
+
+        $this->wiki->mobile()->getSectionsRemaining($params);
     }
 }

@@ -7,6 +7,7 @@ use MediawikiSdkPhp\DTO\Requests\PageRequest;
 use MediawikiSdkPhp\DTO\Requests\PageRequestWithRevision;
 use MediawikiSdkPhp\DTO\Responses\Mobile\GetMobile;
 use MediawikiSdkPhp\DTO\Responses\Mobile\GetMobileLead;
+use MediawikiSdkPhp\DTO\Responses\Mobile\GetMobileRemaining;
 use MediawikiSdkPhp\Exceptions\MediaWikiException;
 use MediawikiSdkPhp\Resources\AbstractWikiMediaResource;
 
@@ -62,5 +63,18 @@ class MobileResource extends AbstractWikiMediaResource
         $url = "page/mobile-sections-lead/{$params['title']}/{$params['revision']}";
 
         return $this->adapter->handle('get', $url, GetMobileLead::class);
+    }
+
+    /**
+     * @throws MediaWikiException
+     * @throws JsonException
+     */
+    public function getSectionsRemaining(array $params): mixed
+    {
+        $this->validateParams(PageRequest::class, $params);
+
+        $url = "page/mobile-sections-remaining/{$params['title']}";
+
+        return $this->adapter->handle('get', $url, GetMobileRemaining::class);
     }
 }

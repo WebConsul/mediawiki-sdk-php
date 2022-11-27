@@ -80,6 +80,7 @@ COMMONS_HOST="https://commons.wikimedia.org/"
   * getSectionsByRevision
   * getSectionsLead
   * getSectionsLeadByRevision
+  * getSectionsRemaining
 * feed - @ToDo
 * transforms - @ToDo
 * math - @ToDo
@@ -323,6 +324,14 @@ You can use this action for a typeahead search that automatically suggests relev
   $wiki = new MediaWiki();
   $params = ['title' => 'Jupiter', 'revision' => 1124023924];
   $res = $wiki->mobile()->getSectionsLeadByRevision($params);
+```
+
+#### getSectionsRemaining
+
+```php
+  $wiki = new MediaWiki();
+  $params = ['title' => 'Jupiter'];
+  $res = $wiki->mobile()->getSectionsRemaining($params);
 ```
 
 ## Request parameters validation
