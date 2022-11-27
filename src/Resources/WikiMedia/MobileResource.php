@@ -3,8 +3,10 @@
 namespace MediawikiSdkPhp\Resources\WikiMedia;
 
 use JsonException;
+use MediawikiSdkPhp\DTO\Requests\GetI18nRequest;
 use MediawikiSdkPhp\DTO\Requests\PageRequest;
-use MediawikiSdkPhp\DTO\Requests\PageRequestWithRevision;
+use MediawikiSdkPhp\DTO\Requests\PageWithRevisionRequest;
+use MediawikiSdkPhp\DTO\Responses\Mobile\GetI18n;
 use MediawikiSdkPhp\DTO\Responses\Mobile\GetMobile;
 use MediawikiSdkPhp\DTO\Responses\Mobile\GetMobileLead;
 use MediawikiSdkPhp\DTO\Responses\Mobile\GetMobileRemaining;
@@ -32,7 +34,7 @@ class MobileResource extends AbstractWikiMediaResource
      */
     public function getSectionsByRevision(array $params): mixed
     {
-        $this->validateParams(PageRequestWithRevision::class, $params);
+        $this->validateParams(PageWithRevisionRequest::class, $params);
 
         $url = "page/mobile-sections/{$params['title']}/{$params['revision']}";
 
@@ -58,7 +60,7 @@ class MobileResource extends AbstractWikiMediaResource
      */
     public function getSectionsLeadByRevision(array $params): mixed
     {
-        $this->validateParams(PageRequestWithRevision::class, $params);
+        $this->validateParams(PageWithRevisionRequest::class, $params);
 
         $url = "page/mobile-sections-lead/{$params['title']}/{$params['revision']}";
 
@@ -84,10 +86,23 @@ class MobileResource extends AbstractWikiMediaResource
      */
     public function getSectionsRemainingByRevision(array $params): mixed
     {
-        $this->validateParams(PageRequestWithRevision::class, $params);
+        $this->validateParams(PageWithRevisionRequest::class, $params);
 
         $url = "page/mobile-sections-remaining/{$params['title']}/{$params['revision']}";
 
         return $this->adapter->handle('get', $url, GetMobileRemaining::class);
+    }
+
+    /**
+     * @throws MediaWikiException
+     * @throws JsonException
+     */
+    public function getI18n(array $params): mixed
+    {
+        $this->validateParams(GetI18nRequest::class, $params);
+
+        $url = "data/i18n/{$params['type']}";
+
+        return $this->adapter->handle('get', $url, GetI18n::class);
     }
 }

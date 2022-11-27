@@ -43,8 +43,8 @@ class GetMobileLead extends DataTransferObject
     public ?array $hatnotes;
 
     /**
-     * @var GetMobileSections[]
+     * @var GetMobileSection[]
      */
-    #[CastWith(ArrayCaster::class, itemType: GetMobileSections::class)]
+    #[CastWith(ArrayCaster::class, itemType: GetMobileSection::class)]
     public ?array $sections;
 }

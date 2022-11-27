@@ -6,11 +6,13 @@ use Spatie\DataTransferObject\Attributes\CastWith;
 use Spatie\DataTransferObject\Casters\ArrayCaster;
 use Spatie\DataTransferObject\DataTransferObject;
 
-class GetMobileRemaining extends DataTransferObject
+class GetI18n extends DataTransferObject
 {
+    public string $locale;
+
     /**
-     * @var GetMobileSection[]
+     * @var GetI18nMessage[]
      */
-    #[CastWith(ArrayCaster::class, itemType: GetMobileSection::class)]
-    public array $sections;
+    #[CastWith(ArrayCaster::class, itemType: GetI18nMessage::class)]
+    public array $messages;
 }

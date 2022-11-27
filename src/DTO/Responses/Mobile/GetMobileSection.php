@@ -4,7 +4,7 @@ namespace MediawikiSdkPhp\DTO\Responses\Mobile;
 
 use Spatie\DataTransferObject\DataTransferObject;
 
-class GetMobileSections extends DataTransferObject
+class GetMobileSection extends DataTransferObject
 {
     public int $id;
 

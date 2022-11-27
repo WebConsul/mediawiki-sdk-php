@@ -2,6 +2,7 @@
 
 namespace Resources;
 
+use MediawikiSdkPhp\DTO\Responses\Mobile\GetI18n;
 use MediawikiSdkPhp\DTO\Responses\Mobile\GetMobile;
 use MediawikiSdkPhp\DTO\Responses\Mobile\GetMobileLead;
 use MediawikiSdkPhp\DTO\Responses\Mobile\GetMobileRemaining;
@@ -127,5 +128,14 @@ class MobileResourceTest extends TestCase
         $this->expectExceptionCode(404);
 
         $this->wiki->mobile()->getSectionsRemainingByRevision($params);
+    }
+
+    public function testGetI18n(): void
+    {
+        $params = ['type' => 'pcs'];
+
+        $response = $this->wiki->mobile()->getI18n($params);
+
+        $this->assertInstanceOf(GetI18n::class, $response);
     }
 }

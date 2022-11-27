@@ -5,7 +5,7 @@ namespace MediawikiSdkPhp\DTO\Requests;
 use Spatie\DataTransferObject\Attributes\Strict;
 
 #[Strict]
-class PageRequestWithRevision extends PageRequest
+class PageWithRevisionRequest extends PageRequest
 {
     public int $revision;
 }
