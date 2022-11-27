@@ -50,4 +50,17 @@ class MobileResource extends AbstractWikiMediaResource
 
         return $this->adapter->handle('get', $url, GetMobileLead::class);
     }
+
+    /**
+     * @throws MediaWikiException
+     * @throws JsonException
+     */
+    public function getSectionsLeadByRevision(array $params): mixed
+    {
+        $this->validateParams(PageRequestWithRevision::class, $params);
+
+        $url = "page/mobile-sections-lead/{$params['title']}/{$params['revision']}";
+
+        return $this->adapter->handle('get', $url, GetMobileLead::class);
+    }
 }

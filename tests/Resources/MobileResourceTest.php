@@ -72,4 +72,22 @@ class MobileResourceTest extends TestCase
 
         $this->wiki->mobile()->getSectionsLead($params);
     }
+
+    public function testGetSectionsLeadByRevision(): void
+    {
+        $params = ['title' => 'Jupiter', 'revision' => 1124023924];
+
+        $response = $this->wiki->mobile()->getSectionsLeadByRevision($params);
+
+        $this->assertInstanceOf(GetMobileLead::class, $response);
+    }
+
+    public function testGetSectionsLeadByRevisionNotFound(): void
+    {
+        $params = ['title' => 'hflk;aHF', 'revision' => 123];
+        $this->expectException(MediaWikiException::class);
+        $this->expectExceptionCode(404);
+
+        $this->wiki->mobile()->getSectionsLeadByRevision($params);
+    }
 }
