@@ -77,4 +77,17 @@ class MobileResource extends AbstractWikiMediaResource
 
         return $this->adapter->handle('get', $url, GetMobileRemaining::class);
     }
+
+    /**
+     * @throws MediaWikiException
+     * @throws JsonException
+     */
+    public function getSectionsRemainingByRevision(array $params): mixed
+    {
+        $this->validateParams(PageRequestWithRevision::class, $params);
+
+        $url = "page/mobile-sections-remaining/{$params['title']}/{$params['revision']}";
+
+        return $this->adapter->handle('get', $url, GetMobileRemaining::class);
+    }
 }
